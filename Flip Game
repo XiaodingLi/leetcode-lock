@@ -1,0 +1,23 @@
+public class Solution {
+    public List<String> generatePossibleNextMoves(String s) {
+    	List<String> rst = new ArrayList<>();
+    	boolean con = false;
+    	for (int i = 1; i < s.length(); i++){
+    		if ((s.charAt(i- 1)== '+') && ((s.charAt(i)== '+'))){
+    			con = true;
+    		}
+    	}
+    	if (!con){
+    		return rst;
+    	}
+    	
+    	int i = 1;
+    	while (i < s.length()){
+    		if ((s.charAt(i- 1)== '+') && ((s.charAt(i)== '+'))){
+    			rst.add(new String(s.substring(0, i - 1)+"--"+ s.substring(i + 1)));
+    		}
+    		i++;
+    	}
+    	return rst;
+    }
+}
