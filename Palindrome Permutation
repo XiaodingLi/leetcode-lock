@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean canPermutePalindrome(String s) {
+        
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++){
+        	char c = s.charAt(i);
+        	int n = map.getOrDefault(c, 0);
+        	map.put(c, n + 1);
+        }
+        int odd = 0;
+        for (Character c : map.keySet()){
+        	if (map.get(c) % 2 != 0){
+        		odd++;
+        	}
+        }
+        
+        if (odd == 1 || odd == 0){
+            return true;
+        } else {
+            return false;
+        }
+    
+    }
+}
