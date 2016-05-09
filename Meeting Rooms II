@@ -1,0 +1,51 @@
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    Comparator<Point> pc = new Comparator<Point>(){
+        public int compare(Point a, Point b){
+            if (a.time == b.time){
+                return a.flag - b.flag;
+            } else {
+                return a.time - b.time;
+            }
+        }
+    };
+    public int minMeetingRooms(Interval[] intervals) {
+        if (intervals == null || intervals.length == 0){
+            return 0;
+        }
+        Point[] temp = new Point[2 * intervals.length];
+        for (int i = 0; i < intervals.length; i++){
+            temp[i * 2] = new Point(intervals[i].start, 1);
+            temp[i * 2 + 1] = new Point(intervals[i].end, 0);
+        }
+        Arrays.sort(temp, pc);
+        int count = 0;
+        int max = 0;
+        for (Point p : temp){
+            if (p.flag == 1){
+                count++;
+            } else {
+                count--;
+            }
+            max = Math.max(max, count);
+        }
+        
+    return max;
+    }
+}
+class Point{
+    int time;
+    int flag; // 1 for ocp; 0 is free
+    Point(int time, int flag){
+        this.time = time;
+        this.flag = flag;
+    }
+}
