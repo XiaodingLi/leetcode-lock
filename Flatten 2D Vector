@@ -1,0 +1,41 @@
+public class Vector2D implements Iterator<Integer> {
+    Queue<Iterator<Integer>> q;
+    Iterator<Integer> current;
+    public Vector2D(List<List<Integer>> vec2d) {
+        q = new LinkedList<>();
+        for (List<Integer> list : vec2d){
+            q.offer(list.iterator());
+        }
+        current = q.poll();
+    }
+
+    @Override
+    public Integer next() {
+        if (!current.hasNext()){
+            return -1;
+        }
+        return current.next();
+    }
+
+    @Override
+    public boolean hasNext() {
+        if (current == null){
+            return false;
+        }
+        while (!current.hasNext()){
+            if (!q.isEmpty()){
+                current = q.poll();
+            } else {
+                return false;
+            }
+        }
+        return true;
+        //return vec2d.get(vec2d.size() - 1).iterator().hasNext();
+    }
+}
+
+/**
+ * Your Vector2D object will be instantiated and called as such:
+ * Vector2D i = new Vector2D(vec2d);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
