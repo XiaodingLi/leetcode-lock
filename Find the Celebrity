@@ -11,7 +11,7 @@ public class Solution extends Relation {
         }
          
         
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++){//c检查假设是否成立
          if (i != c && (knows(c, i)  || !knows(i, c))   ){
              return -1;
          }
