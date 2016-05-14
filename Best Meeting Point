@@ -1,0 +1,40 @@
+public class Solution {
+    class Point{
+        int row;
+        int col;
+        public Point( int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+    public int minTotalDistance(int[][] grid) {
+        if (grid == null || grid.length == 0){
+            return 0;
+        }
+        int row = grid.length;
+        int col = grid[0].length;
+        List<Point> homes = new ArrayList<>();
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                if (grid[i][j] == 1){
+                    homes.add(new Point(i, j));
+                }
+            }
+        }
+        
+        int sum = Integer.MAX_VALUE;
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                sum = Math.min(sum, getD(i, j, homes));
+            }
+        }
+        return sum;
+    }
+    private int getD(int x, int y, List<Point> homes){
+        int dis = 0;
+        for (Point p : homes){
+            dis += Math.abs(x- p.row) + Math.abs(y - p.col);
+        }
+        return dis;
+    }
+}
