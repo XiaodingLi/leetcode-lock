@@ -1,0 +1,16 @@
+public class Solution {
+    public int minArea(char[][] image, int x, int y) {
+        int top = image.length - 1, bottom = 0, left = image[0].length - 1, right = 0;
+        for (int i = 0; i < image.length; i++){
+            for (int j = 0; j < image[0].length; j++){
+                if (image[i][j] == '1'){
+                    top = Math.min(top, i);
+                    bottom = Math.max(bottom, i);
+                    left = Math.min(left, j);
+                    right= Math.max(right, j);
+                }
+            }
+        }
+        return (bottom - top + 1 ) * (right - left + 1);
+    }
+}
