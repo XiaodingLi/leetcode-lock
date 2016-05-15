@@ -1,0 +1,23 @@
+public class Solution {
+	int sum;
+    public int depthSum(List<NestedInteger> nestedList) {
+       if (nestedList == null){
+    	   return 0;
+       }
+       
+       for (NestedInteger nit : nestedList){
+    	   helper(nit, 1);
+       }
+       return sum;
+    }
+    private void helper(NestedInteger nit, int level){
+    	if (nit.isInteger()){
+    		sum += nit.getInteger() * level;
+    		return;
+    	} else {
+    		for (NestedInteger iin : nit.getList()){
+    			helper(iin, level + 1);
+    		}
+    	}
+    }
+}
