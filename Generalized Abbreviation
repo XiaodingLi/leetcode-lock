@@ -1,0 +1,20 @@
+public List<String> generateAbbreviations(String word) {
+        List<String> rst = new ArrayList<>();
+        if (word == null ){
+            return rst;
+        }
+        help (rst, word, 0, "", 0);
+        return rst;
+    }
+    private void help(List<String> rst, String input, int depth, String item, int count){
+        if (depth == input.length()){
+            if (count > 0){
+                item += count;
+            }
+            rst.add(item);
+            return;
+        }
+        
+        help (rst, input, depth + 1, item, count + 1);//abbreviate
+        help (rst, input, depth + 1, item + (count > 0 ? count : "") + input.charAt(depth), 0);
+    }
