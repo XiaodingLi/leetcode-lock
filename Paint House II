@@ -1,0 +1,38 @@
+public class Solution {
+    public int minCostII(int[][] costs) {
+        if (costs == null || costs.length == 0){
+            return 0;
+        }
+        int n = costs.length;
+        int k = costs[0].length;
+        int[] lastC = new int[k];
+        for (int i = 0; i < k; i++){
+            lastC[i] = costs[0][i];
+        }
+        
+        for (int i = 1; i < n; i++){
+            int[] curC = new int[k];
+            
+            for (int j = 0; j < k; j++){
+                int min = Integer.MAX_VALUE;
+                for (int m = 0; m < k ; m++){
+                	if (m != j){
+                		min = Math.min(min, lastC[m]);
+                		
+                	}
+                }
+                curC[j] = costs[i][j] + min;
+            }
+            
+            for (int j = 0; j < k; j++){
+                lastC[j] = curC[j];
+            }
+        }
+        
+        int rst = lastC[0];
+        for (int i = 1; i < k; i++){
+            rst = Math.min(rst, lastC[i]);
+        }
+        return rst;
+    }
+}
