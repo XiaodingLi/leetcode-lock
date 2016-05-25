@@ -1,0 +1,34 @@
+public class Solution {
+    public List<String> findItinerary(String[][] tickets) {
+
+		List<String> rst = new ArrayList<>();
+		Map<String, Queue<String>> map = new HashMap<>();
+		
+		for (String[] tricket : tickets){
+			String from = tricket[0];
+			if (!map.containsKey(from)){
+				Queue<String> dest = new PriorityQueue<>(1, new Comparator<String>(){
+					public int compare(String a, String b){
+						//return b.compareTo(a);
+						return a.compareTo(b);
+					}
+				});
+				map.put(from, dest);
+			}
+			map.get(from).add(tricket[1]);
+		}
+		
+		String from = "JFK";
+		
+		Stack<String> stack = new Stack<>();
+		stack.push("JFK");
+		while (!stack.isEmpty()){
+			while (map.containsKey(stack.peek()) && !map.get(stack.peek()).isEmpty()){
+				stack.push(map.get(stack.peek()).poll());
+			}
+			rst.add(0, stack.pop());
+		}
+		return rst;
+	}
+    
+}
